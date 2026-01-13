@@ -1,20 +1,20 @@
 # Session Start
 
-Esegui il protocollo di inizio sessione:
+Execute the session start protocol:
 
 ## Step 1: Load Context
-1. Leggi `brain/context.md` per lo stato corrente
-2. Leggi l'ultimo file `notes/daily-summaries/closing-*.md` (se esiste)
+1. Read `brain/context.md` for current state
+2. Read the latest `notes/daily-summaries/closing-*.md` file (if exists)
 
 ## Step 2: Propose
-Riassumi in max 5 bullet points:
-- Cosa e' stato fatto nell'ultima sessione (se c'e' un closing)
-- Cosa e' pending
-- Focus corrente da context
+Summarize in max 5 bullet points:
+- What was done in last session (if closing exists)
+- What is pending
+- Current focus from context
 
-Poi chiedi: **"Confermi queste priorita' o cambiamo?"**
+Then ask: **"Confirm these priorities or change?"**
 
 ## Step 3: STOP
-**Aspetta risposta prima di procedere.**
+**Wait for response before proceeding.**
 
-Non caricare altri file, non fare altre azioni. Aspetta l'utente.
+Don't load other files, don't take other actions. Wait for the user.

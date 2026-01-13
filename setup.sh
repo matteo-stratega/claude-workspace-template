@@ -1,125 +1,190 @@
 #!/bin/bash
 
 # ============================================
-# CLAUDE CODE - SETUP AUTOMATICO
+#  AI WORKSPACE - ONE CLICK SETUP
+#  Claude Code + Gemini CLI + Organized Structure
 # ============================================
-# Esegui questo script per configurare tutto
-# automaticamente. Non serve essere tecnici!
+#
+#  Run with:
+#  curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh | bash
+#
 # ============================================
+
+set -e
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
 
 echo ""
-echo "=========================================="
-echo "   CLAUDE CODE - SETUP AUTOMATICO"
-echo "=========================================="
+echo -e "${BLUE}============================================${NC}"
+echo -e "${BLUE}   AI WORKSPACE - ONE CLICK SETUP${NC}"
+echo -e "${BLUE}============================================${NC}"
 echo ""
 
-# Chiedi il nome del progetto
-read -p "Come vuoi chiamare il tuo progetto? (es: lavoro, progetti, notes): " PROJECT_NAME
+# ============================================
+# STEP 1: Check Node.js
+# ============================================
+echo -e "${YELLOW}[1/6] Checking Node.js...${NC}"
 
-# Usa un nome di default se vuoto
-if [ -z "$PROJECT_NAME" ]; then
-    PROJECT_NAME="mio-progetto"
+if ! command -v node &> /dev/null; then
+    echo -e "${RED}Node.js not found!${NC}"
+    echo ""
+    echo "Please install Node.js first:"
+    echo "  → https://nodejs.org (download LTS version)"
+    echo ""
+    echo "Then run this script again."
+    exit 1
 fi
 
-# Rimuovi spazi e caratteri speciali
+NODE_VERSION=$(node --version)
+echo -e "${GREEN}  ✓ Node.js $NODE_VERSION found${NC}"
+
+# ============================================
+# STEP 2: Install Claude Code
+# ============================================
+echo ""
+echo -e "${YELLOW}[2/6] Installing Claude Code...${NC}"
+
+if command -v claude &> /dev/null; then
+    echo -e "${GREEN}  ✓ Claude Code already installed${NC}"
+else
+    npm install -g @anthropic-ai/claude-code
+    echo -e "${GREEN}  ✓ Claude Code installed${NC}"
+fi
+
+# ============================================
+# STEP 3: Install Gemini CLI
+# ============================================
+echo ""
+echo -e "${YELLOW}[3/6] Installing Gemini CLI...${NC}"
+
+if command -v gemini &> /dev/null; then
+    echo -e "${GREEN}  ✓ Gemini CLI already installed${NC}"
+else
+    npm install -g @google/gemini-cli
+    echo -e "${GREEN}  ✓ Gemini CLI installed${NC}"
+fi
+
+# ============================================
+# STEP 4: Create workspace folder
+# ============================================
+echo ""
+echo -e "${YELLOW}[4/6] Creating workspace...${NC}"
+
+# Ask for project name
+read -p "Workspace name (default: workspace): " PROJECT_NAME
+PROJECT_NAME=${PROJECT_NAME:-workspace}
+
+# Clean name
 PROJECT_NAME=$(echo "$PROJECT_NAME" | tr ' ' '-' | tr -cd '[:alnum:]-')
 
+# Create in home directory
+WORKSPACE_PATH="$HOME/$PROJECT_NAME"
+
+if [ -d "$WORKSPACE_PATH" ]; then
+    echo -e "${YELLOW}  ! Folder already exists: $WORKSPACE_PATH${NC}"
+    read -p "  Continue anyway? (y/n): " confirm
+    if [[ $confirm != "y" ]]; then
+        echo "Aborted."
+        exit 1
+    fi
+else
+    mkdir -p "$WORKSPACE_PATH"
+fi
+
+cd "$WORKSPACE_PATH"
+echo -e "${GREEN}  ✓ Workspace: $WORKSPACE_PATH${NC}"
+
+# ============================================
+# STEP 5: Create folder structure + files
+# ============================================
 echo ""
-echo "Creo il progetto '$PROJECT_NAME'..."
-echo ""
+echo -e "${YELLOW}[5/6] Creating structure...${NC}"
 
-# Crea la cartella principale
-mkdir -p "$HOME/$PROJECT_NAME"
-cd "$HOME/$PROJECT_NAME"
-
-# Inizializza git
-git init --quiet
-
-# Crea struttura cartelle
+# Folders
 mkdir -p brain
 mkdir -p notes/daily-summaries
 mkdir -p docs
 mkdir -p .claude/commands
 
-# ============================================
-# CREA CLAUDE.md
-# ============================================
+# CLAUDE.md
 cat > CLAUDE.md << 'EOF'
 # CLAUDE.md
 
-Istruzioni per Claude Code in questo progetto.
+Instructions for Claude Code in this workspace.
 
 ## Startup Protocol
 
-All'avvio di ogni sessione:
-1. Leggi `brain/context.md` per capire lo stato corrente
-2. Leggi l'ultimo closing report in `notes/daily-summaries/` (se esiste)
-3. Proponi le priorita e chiedi conferma
+On session start:
+1. Read `brain/context.md` for current state
+2. Read latest `notes/daily-summaries/closing-*.md` (if exists)
+3. Propose priorities and ask for confirmation
 
-## Comandi
+## Commands
 
-- `/start` - Inizia sessione di lavoro
-- `/close` - Chiudi sessione con report
+- `/start` - Start work session
+- `/close` - End session with report
 
-## Regole Generali
+## Rules
 
-1. **Non inventare dati** - Se non sai qualcosa, chiedi
-2. **Rispetta la struttura cartelle** - Ogni file al suo posto
-3. **Esegui in autonomia** - Chiedi solo se mancano info critiche
-4. **Sii conciso** - Risposte brevi e actionable
-5. **Aggiorna context.md** - Mantieni lo stato aggiornato
+1. **Don't invent data** - Ask if you don't know
+2. **Respect folder structure** - Each file in its place
+3. **Execute autonomously** - Only ask if critical info is missing
+4. **Be concise** - Short, actionable responses
+5. **Update context.md** - Keep state updated
 
-## Struttura Progetto
+## Folder Structure
 
-- `brain/` - Stato e contesto persistente
-- `notes/` - Note e appunti
-- `docs/` - Documenti finali
-- `.claude/commands/` - Comandi custom
+- `brain/` - Persistent context and state
+- `notes/` - Notes and daily summaries
+- `docs/` - Final documents
 
-## Stile Output
+## Output Style
 
-- Usa markdown per formattare
-- Bullet points per liste
-- Niente emoji (a meno che non richiesto)
-- Vai dritto al punto
+- Use markdown formatting
+- Bullet points for lists
+- No emojis (unless requested)
+- Get to the point
 EOF
 
-# ============================================
-# CREA brain/context.md
-# ============================================
+# brain/context.md
 cat > brain/context.md << 'EOF'
 # Context File
 
-**Last Updated:** [DATA]
+**Last Updated:** [DATE]
 
 ---
 
-## Focus Corrente
+## Current Focus
 
-### Questa Settimana
+### This Week
 - [ ] Task 1
 - [ ] Task 2
 - [ ] Task 3
 
 ---
 
-## Progetti Attivi
+## Active Projects
 
-| Progetto | Status | Note |
-|----------|--------|------|
+| Project | Status | Notes |
+|---------|--------|-------|
 | | | |
 
 ---
 
-## Decisioni Chiave
+## Key Decisions
 
-| Data | Decisione | Motivazione |
-|------|-----------|-------------|
+| Date | Decision | Why |
+|------|----------|-----|
 | | | |
 
 ---
 
-## Prossime Azioni
+## Next Actions
 
 1.
 2.
@@ -127,66 +192,60 @@ cat > brain/context.md << 'EOF'
 
 ---
 
-*Aggiornare questo file a fine sessione*
+*Update this file at end of each session*
 EOF
 
-# ============================================
-# CREA .claude/commands/start.md
-# ============================================
+# .claude/commands/start.md
 cat > .claude/commands/start.md << 'EOF'
 # Session Start
 
-Esegui il protocollo di inizio sessione:
+Execute the session start protocol:
 
 ## Step 1: Load Context
-1. Leggi `brain/context.md` per lo stato corrente
-2. Leggi l'ultimo file `notes/daily-summaries/closing-*.md` (se esiste)
+1. Read `brain/context.md` for current state
+2. Read the latest `notes/daily-summaries/closing-*.md` file (if exists)
 
 ## Step 2: Propose
-Riassumi in max 5 bullet points:
-- Cosa e' stato fatto nell'ultima sessione (se c'e' un closing)
-- Cosa e' pending
-- Focus corrente da context
+Summarize in max 5 bullet points:
+- What was done in last session (if closing exists)
+- What is pending
+- Current focus from context
 
-Poi chiedi: **"Confermi queste priorita' o cambiamo?"**
+Then ask: **"Confirm these priorities or change?"**
 
 ## Step 3: STOP
-**Aspetta risposta prima di procedere.**
+**Wait for response before proceeding.**
 EOF
 
-# ============================================
-# CREA .claude/commands/close.md
-# ============================================
+# .claude/commands/close.md
 cat > .claude/commands/close.md << 'EOF'
 # Session Close
 
-Esegui il protocollo di chiusura:
+Execute the session close protocol:
 
-1. **Scrivi closing report** in `notes/daily-summaries/closing-DDMMYYYY.md`:
+1. **Write closing report** in `notes/daily-summaries/closing-DDMMYYYY.md`:
 
 ```
-# Closing [DATA]
+# Closing [DATE]
 
 ## TL;DR
-- **Done**: [cosa completato oggi]
-- **Pending**: [cosa rimane da fare]
-- **Next**: [prossima azione prioritaria]
+- **Done**: [what completed today]
+- **Pending**: [what remains]
+- **Next**: [next priority action]
 
 ## Files Created/Modified
-[lista file]
+[file list]
 
 ---
 **Session Status**: Completed
 ```
 
-2. **Aggiorna brain/context.md** se ci sono cambi significativi
+2. **Update brain/context.md** if there are significant changes
 
-3. **Conferma** all'utente: "Sessione chiusa. Report salvato."
+3. **Confirm** to user: "Session closed. Report saved."
 EOF
 
-# ============================================
-# CREA .gitignore
-# ============================================
+# .gitignore
 cat > .gitignore << 'EOF'
 .DS_Store
 Thumbs.db
@@ -198,30 +257,59 @@ node_modules/
 *.key
 .env
 .env.local
-.claude/settings.local.json
 EOF
 
-# Primo commit
-git add -A
-git commit -m "Setup iniziale progetto" --quiet
+echo -e "${GREEN}  ✓ Folders created${NC}"
+echo -e "${GREEN}  ✓ CLAUDE.md created${NC}"
+echo -e "${GREEN}  ✓ brain/context.md created${NC}"
+echo -e "${GREEN}  ✓ /start command created${NC}"
+echo -e "${GREEN}  ✓ /close command created${NC}"
 
 # ============================================
-# FINE!
+# STEP 6: Initialize git
 # ============================================
 echo ""
-echo "=========================================="
-echo "   SETUP COMPLETATO!"
-echo "=========================================="
+echo -e "${YELLOW}[6/6] Initializing git...${NC}"
+
+if [ -d ".git" ]; then
+    echo -e "${GREEN}  ✓ Git already initialized${NC}"
+else
+    git init --quiet
+    git add -A
+    git commit -m "Initial setup" --quiet
+    echo -e "${GREEN}  ✓ Git initialized${NC}"
+fi
+
+# ============================================
+# DONE!
+# ============================================
 echo ""
-echo "Il tuo progetto e' stato creato in:"
-echo "   $HOME/$PROJECT_NAME"
+echo -e "${GREEN}============================================${NC}"
+echo -e "${GREEN}   SETUP COMPLETE!${NC}"
+echo -e "${GREEN}============================================${NC}"
 echo ""
-echo "Per iniziare:"
+echo "Your AI workspace is ready at:"
+echo -e "  ${BLUE}$WORKSPACE_PATH${NC}"
 echo ""
-echo "   1. Apri il terminale"
-echo "   2. Scrivi: cd $HOME/$PROJECT_NAME"
-echo "   3. Scrivi: claude"
-echo "   4. Scrivi: /start"
+echo -e "${YELLOW}To start with Claude (requires Claude Pro \$20/month):${NC}"
 echo ""
-echo "=========================================="
+echo "  cd $WORKSPACE_PATH"
+echo "  claude"
+echo "  /start"
+echo ""
+echo -e "${YELLOW}Or use Gemini (free with Google account):${NC}"
+echo ""
+echo "  cd $WORKSPACE_PATH"
+echo "  gemini"
+echo ""
+echo "============================================"
+echo ""
+echo "First time using these tools?"
+echo "  • Claude will open browser for Anthropic login"
+echo "  • Gemini will open browser for Google login"
+echo ""
+echo "============================================"
+echo ""
+echo "Created by Matteo Lombardi"
+echo "https://github.com/matteo-stratega/claude-workspace-template"
 echo ""

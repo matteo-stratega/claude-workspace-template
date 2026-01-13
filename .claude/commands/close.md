@@ -1,41 +1,41 @@
 # Session Close
 
-Esegui il protocollo di chiusura:
+Execute the session close protocol:
 
-## Step 1: Scrivi Closing Report
+## Step 1: Write Closing Report
 
-Crea file `notes/daily-summaries/closing-DDMMYYYY.md` con questo formato:
+Create file `notes/daily-summaries/closing-DDMMYYYY.md` with this format:
 
 ```
-# Closing [DATA]
+# Closing [DATE]
 
 ## TL;DR
-- **Done**: [cosa completato oggi]
-- **Pending**: [cosa rimane da fare]
-- **Next**: [prossima azione prioritaria]
+- **Done**: [what completed today]
+- **Pending**: [what remains to do]
+- **Next**: [next priority action]
 
 ## Files Created/Modified
-- [lista file creati o modificati]
+- [list of files created or modified]
 
 ## Notes
-[Qualsiasi nota importante]
+[Any important notes]
 
 ---
 **Session Status**: Completed
 ```
 
-## Step 2: Aggiorna Context
+## Step 2: Update Context
 
-Aggiorna `brain/context.md` se ci sono:
-- Nuove decisioni chiave
-- Cambi di status progetti
-- Task completati da rimuovere
-- Nuove priorita'
+Update `brain/context.md` if there are:
+- New key decisions
+- Project status changes
+- Completed tasks to remove
+- New priorities
 
-## Step 3: Conferma
+## Step 3: Confirm
 
-Conferma all'utente: "Sessione chiusa. Report salvato in [path]"
+Confirm to user: "Session closed. Report saved in [path]"
 
 ---
 
-NON chiedere conferma per scrivere - fallo direttamente.
+Don't ask for confirmation to write - just do it.

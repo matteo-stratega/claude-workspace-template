@@ -1,52 +1,52 @@
 # CLAUDE.md
 
-Istruzioni per Claude Code in questo progetto.
+Instructions for Claude Code in this workspace.
 
 ## Startup Protocol
 
-All'avvio di ogni sessione:
-1. Leggi `brain/context.md` per capire lo stato corrente
-2. Leggi l'ultimo closing report in `notes/daily-summaries/` (se esiste)
-3. Proponi le priorità e chiedi conferma
+On session start:
+1. Read `brain/context.md` for current state
+2. Read latest `notes/daily-summaries/closing-*.md` (if exists)
+3. Propose priorities and ask for confirmation
 
-## Comandi
+## Commands
 
-- `/start` - Inizia sessione di lavoro
-- `/close` - Chiudi sessione con report
+- `/start` - Start work session
+- `/close` - End session with report
 
-## Regole Generali
+## General Rules
 
-1. **Non inventare dati** - Se non sai qualcosa, chiedi
-2. **Rispetta la struttura cartelle** - Ogni file al suo posto
-3. **Esegui in autonomia** - Chiedi solo se mancano info critiche
-4. **Sii conciso** - Risposte brevi e actionable
-5. **Aggiorna context.md** - Mantieni lo stato aggiornato
+1. **Don't invent data** - Ask if you don't know
+2. **Respect folder structure** - Each file in its place
+3. **Execute autonomously** - Only ask if critical info is missing
+4. **Be concise** - Short, actionable responses
+5. **Update context.md** - Keep state updated
 
-## Struttura Progetto
+## Project Structure
 
 ```
-progetto/
-├── brain/              # Stato e contesto persistente
-│   └── context.md      # File principale di stato
-├── notes/              # Note e appunti
-│   └── daily-summaries/  # Report giornalieri
-├── docs/               # Documenti finali
-├── .claude/            # Config Claude Code
-│   └── commands/       # Comandi custom
-└── CLAUDE.md           # Questo file
+workspace/
+├── brain/              # Persistent state and context
+│   └── context.md      # Main state file
+├── notes/              # Notes and memos
+│   └── daily-summaries/  # Daily reports
+├── docs/               # Final documents
+├── .claude/            # Claude Code config
+│   └── commands/       # Custom commands
+└── CLAUDE.md           # This file
 ```
 
-## Stile Output
+## Output Style
 
-- Usa markdown per formattare
-- Bullet points per liste
-- Niente emoji (a meno che non richiesto)
-- Vai dritto al punto
-- Frasi brevi
+- Use markdown formatting
+- Bullet points for lists
+- No emojis (unless requested)
+- Get to the point
+- Short sentences
 
-## Cose da NON Fare
+## Things NOT to Do
 
-1. Non caricare file grandi interi - prima sample, poi chiedi
-2. Non leggere file "just in case" - solo quello che serve
-3. Non inventare numeri o dati
-4. Non fare sessioni troppo lunghe senza salvare
+1. Don't load entire large files - sample first, then ask
+2. Don't read files "just in case" - only what's needed
+3. Don't invent numbers or data
+4. Don't run long sessions without saving

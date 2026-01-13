@@ -1,35 +1,35 @@
 # Context File
 
-**Last Updated:** [DATA]
+**Last Updated:** [DATE]
 
 ---
 
-## Focus Corrente
+## Current Focus
 
-### Questa Settimana
+### This Week
 - [ ] Task 1
 - [ ] Task 2
 - [ ] Task 3
 
 ---
 
-## Progetti Attivi
+## Active Projects
 
-| Progetto | Status | Note |
-|----------|--------|------|
-| Esempio | In corso | Descrizione breve |
+| Project | Status | Notes |
+|---------|--------|-------|
+| Example | In progress | Brief description |
 
 ---
 
-## Decisioni Chiave
+## Key Decisions
 
-| Data | Decisione | Motivazione |
-|------|-----------|-------------|
+| Date | Decision | Why |
+|------|----------|-----|
 | | | |
 
 ---
 
-## Prossime Azioni Prioritarie
+## Next Priority Actions
 
 1.
 2.
@@ -37,10 +37,10 @@
 
 ---
 
-## Note
+## Notes
 
-[Qualsiasi cosa importante da ricordare tra sessioni]
+[Anything important to remember between sessions]
 
 ---
 
-*Aggiornare questo file a fine sessione se ci sono cambi significativi*
+*Update this file at end of session if there are significant changes*
