@@ -4,43 +4,62 @@ A ready-to-use workspace template for Claude Code with persistent memory, custom
 
 ## What You Get
 
+- **Claude Code** - AI in your terminal
+- **Gemini CLI** - Backup AI from Google
 - **Persistent memory** - Claude remembers your projects between sessions
 - **Custom commands** - `/start` and `/close` for workflow automation
 - **Organized structure** - Folders for notes, docs, and context
-- **Session reports** - Automatic daily summaries
 
 ## Quick Start
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org) (LTS version)
+- [Node.js](https://nodejs.org) (LTS version) - free
 - [Claude Pro subscription](https://claude.ai) ($20/month)
 
-### Installation
+### One-Click Installation
+
+**Option 1: One-liner**
+```bash
+curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh | bash
+```
+
+**Option 2: Two steps (if the above doesn't work)**
+```bash
+curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh -o setup.sh
+bash setup.sh
+```
+
+**Windows (PowerShell)**
+```powershell
+irm https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup-windows.ps1 | iex
+```
+
+This will:
+- Install Claude Code
+- Install Gemini CLI
+- Create your workspace folder
+- Set up the folder structure
+- Initialize git
+
+### Manual Installation
 
 ```bash
 # 1. Install Claude Code
 npm install -g @anthropic-ai/claude-code
 
-# 2. Clone this repo
-git clone https://github.com/YOUR_USERNAME/claude-workspace-template.git my-workspace
+# 2. Install Gemini CLI (optional)
+npm install -g @google/gemini-cli
+
+# 3. Clone this repo
+git clone https://github.com/matteo-stratega/claude-workspace-template.git my-workspace
 cd my-workspace
 
-# 3. Start Claude
+# 4. Start Claude
 claude
 
-# 4. Initialize
-/init
-```
-
-Or use the automated setup:
-
-```bash
-# Mac/Linux
-curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/claude-workspace-template/main/setup.sh | bash
-
-# Windows (PowerShell)
-irm https://raw.githubusercontent.com/YOUR_USERNAME/claude-workspace-template/main/setup.ps1 | iex
+# 5. Begin session
+/start
 ```
 
 ## Folder Structure
@@ -63,7 +82,8 @@ workspace/
 
 ### Starting a Session
 
-```
+```bash
+cd ~/workspace
 claude
 /start
 ```
@@ -124,26 +144,19 @@ Update with your projects:
 
 ## Optional: Add Ollama (Local AI)
 
-For local AI models (free, private):
+For local AI models (free, private, offline):
 
 ```bash
 # Install Ollama
-# Mac: brew install ollama
-# Or download from ollama.com
+brew install ollama
+# Or download from https://ollama.com
 
-# Pull models
-ollama pull llama3.1
-ollama pull gemma3
+# Pull a model
+ollama pull mistral:7b-instruct
 
-# Test
-ollama run llama3.1
+# Test it
+ollama run mistral:7b-instruct
 ```
-
-## Optional: Add Obsidian (Nice Viewer)
-
-1. Download [Obsidian](https://obsidian.md)
-2. Open your workspace as a vault
-3. Browse your notes visually
 
 ## Commands Reference
 
@@ -151,20 +164,17 @@ ollama run llama3.1
 |---------|--------------|
 | `/start` | Load context, show priorities |
 | `/close` | Save report, end session |
-| `/init` | Create CLAUDE.md (first time) |
 | `/help` | Show help |
 | `/clear` | Clear conversation |
 
 ## Video Tutorials
 
-- [Part 1: Quick Setup (5 min)](YOUTUBE_LINK)
-- [Part 2: Full Power Mode (15 min)](YOUTUBE_LINK)
+- [Part 1: Quick Setup (4 min)](YOUTUBE_LINK)
+- [Part 2: Workflow + Local AI (12 min)](YOUTUBE_LINK)
 
 ## Credits
 
 Created by [Matteo Lombardi](https://linkedin.com/in/matteolombardigrowth) - Growth Architect building in public.
-
-Inspired by [NetworkChuck's video](https://www.youtube.com/watch?v=MsQACpcuTkU).
 
 ## License
 
