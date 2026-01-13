@@ -1,0 +1,29 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+
+# Credentials (mai committare!)
+.credentials/
+*.pem
+*.key
+.env
+.env.local
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Large data files (opzionale - decommenta se usi)
+# data/*.csv
+# data/*.xlsx
+
+# Temporary files
+*.tmp
+*.temp
