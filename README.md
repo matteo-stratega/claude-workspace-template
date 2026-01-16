@@ -171,15 +171,26 @@ ollama run mistral:7b-instruct
 
 ### Permission Error (EACCES) on Mac
 
-If you see `EACCES: permission denied` during installation:
+If you see `EACCES: permission denied` during installation, choose ONE of these fixes:
 
-**Quick fix:**
+---
+
+**Option A: Quick fix (just works)**
+
+Add `sudo` before the install commands:
 ```bash
 sudo npm install -g @anthropic-ai/claude-code
 sudo npm install -g @google/gemini-cli
 ```
 
-**Better fix (recommended, one-time setup):**
+Then run the setup script again.
+
+---
+
+**Option B: Proper fix (recommended)**
+
+This fixes npm permissions permanently. You only need to do this once, and you'll never see this error again:
+
 ```bash
 mkdir -p ~/.npm-global
 npm config set prefix '~/.npm-global'
@@ -187,7 +198,12 @@ echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-Then run the setup script again.
+Then run the setup script again:
+```bash
+curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh | bash
+```
+
+---
 
 ## Video Tutorial
 
