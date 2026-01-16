@@ -20,18 +20,13 @@ A ready-to-use workspace template for Claude Code with persistent memory, custom
 
 ### One-Click Installation
 
-**Option 1: One-liner**
-```bash
-curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh | bash
-```
-
-**Option 2: Two steps (if the above doesn't work)**
+**Mac/Linux:**
 ```bash
 curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh -o setup.sh
 bash setup.sh
 ```
 
-**Windows (PowerShell)**
+**Windows (PowerShell):**
 ```powershell
 irm https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup-windows.ps1 | iex
 ```
@@ -212,7 +207,8 @@ source ~/.zshrc
 
 Then run the setup script again:
 ```bash
-curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/matteo-stratega/claude-workspace-template/main/setup.sh -o setup.sh
+bash setup.sh
 ```
 
 ---
