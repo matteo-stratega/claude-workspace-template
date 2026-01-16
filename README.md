@@ -167,14 +167,13 @@ ollama run mistral:7b-instruct
 | `/help` | Show help |
 | `/clear` | Clear conversation |
 
-## Video Tutorials
+## Video Tutorial
 
-- [Part 1: Quick Setup (4 min)](YOUTUBE_LINK)
-- [Part 2: Workflow + Local AI (12 min)](YOUTUBE_LINK)
+- [My AI Brain: 1-Click Setup](https://www.youtube.com/watch?v=FxcAz0oRD7A)
 
 ## Credits
 
-Created by [Matteo Lombardi](https://linkedin.com/in/matteolombardigrowth) - Growth Architect building in public.
+Created by [Matteo Lombardi](https://linkedin.com/in/matteolombardi9) - Growth Architect building in public.
 
 ## License
 
