@@ -14,6 +14,7 @@ A ready-to-use workspace template for Claude Code with persistent memory, custom
 
 ### Prerequisites
 
+- **Mac users:** Xcode Command Line Tools (see Troubleshooting if prompted)
 - [Node.js](https://nodejs.org) (LTS version) - free
 - [Claude Pro subscription](https://claude.ai) ($20/month)
 
@@ -168,6 +169,17 @@ ollama run mistral:7b-instruct
 | `/clear` | Clear conversation |
 
 ## Troubleshooting
+
+### Xcode Command Line Tools (Mac)
+
+If you see a popup asking to install developer tools, click **Install** and wait for it to complete. Then run the setup script again.
+
+Or install manually:
+```bash
+xcode-select --install
+```
+
+---
 
 ### Permission Error (EACCES) on Mac
 
