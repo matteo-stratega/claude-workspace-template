@@ -167,6 +167,28 @@ ollama run mistral:7b-instruct
 | `/help` | Show help |
 | `/clear` | Clear conversation |
 
+## Troubleshooting
+
+### Permission Error (EACCES) on Mac
+
+If you see `EACCES: permission denied` during installation:
+
+**Quick fix:**
+```bash
+sudo npm install -g @anthropic-ai/claude-code
+sudo npm install -g @google/gemini-cli
+```
+
+**Better fix (recommended, one-time setup):**
+```bash
+mkdir -p ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Then run the setup script again.
+
 ## Video Tutorial
 
 - [My AI Brain: 1-Click Setup](https://www.youtube.com/watch?v=FxcAz0oRD7A)
